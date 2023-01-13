@@ -1,0 +1,40 @@
+schemaVersion: 2.1.0
+metadata:
+  description:
+    "Drupal is an open-source PHP framework, which is robust and easy to understand."
+  displayName: Drupal
+  icon: https://www.drupal.org//sites/all/themes/bluecheese/images/icon-w-drupal.svg
+  name: php-drupal
+  projectType: Drupal
+  provider: Red Hat
+  language: PHP
+  tags:
+    - PHP
+    - Drupal
+  version: 1.0.1
+starterProjects:
+  - name: php-drupal-starter
+    git:
+      checkoutFrom:
+        revision: main
+      remotes:
+        origin: https://git.drupalcode.org/project/drupal.git
+components:
+  - container:
+      endpoints:
+        - name: http-drupal
+          targetPort: 8000
+      image: smmccabe/docker:latest
+      args: ["tail", "-f", "/dev/null"]
+      memoryLimit: 1024Mi
+      mountSources: true
+    name: runtime
+commands:
+  - exec:
+      commandLine: composer install
+      component: runtime
+      group:
+        isDefault: false
+        kind: build
+      workingDir: ${PROJECT_SOURCE}
+    id: install
