@@ -16,7 +16,7 @@ starterProjects:
   - name: php-drupal-starter
     git:
       checkoutFrom:
-        revision: main
+        revision: 10.1.x
       remotes:
         origin: https://git.drupalcode.org/project/drupal.git
 components:
